@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Ps3-JB-wgs">
+                                <rect key="frame" x="113.5" y="160.5" width="148" height="270"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tw8-Av-IbU">
+                                        <rect key="frame" x="0.0" y="0.0" width="148" height="30"/>
+                                        <state key="normal" title="根据名字获得一个Ivar"/>
+                                        <connections>
+                                            <action selector="getClassVariableByName:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hgI-QG-j13"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JRc-QT-pPJ">
+                                        <rect key="frame" x="28" y="30" width="92" height="30"/>
+                                        <state key="normal" title="获取所有变量"/>
+                                        <connections>
+                                            <action selector="getAllVValue:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dib-G9-U9r"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4qh-4K-zrC">
+                                        <rect key="frame" x="28" y="60" width="92" height="30"/>
+                                        <state key="normal" title="获得所有属性"/>
+                                        <connections>
+                                            <action selector="getAllProperty:" destination="BYZ-38-t0r" eventType="touchUpInside" id="K0V-gg-eZB"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K9E-RA-Wqi">
+                                        <rect key="frame" x="12.5" y="90" width="123" height="30"/>
+                                        <state key="normal" title="改变私有变量的值"/>
+                                        <connections>
+                                            <action selector="changePrivateVValue:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dNt-V5-jac"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lUu-dJ-vKj">
+                                        <rect key="frame" x="20" y="120" width="108" height="30"/>
+                                        <state key="normal" title="添加一个新属性"/>
+                                        <connections>
+                                            <action selector="addNewProperty:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OVl-pM-k5b"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6iU-UU-cEO">
+                                        <rect key="frame" x="28" y="150" width="92" height="30"/>
+                                        <state key="normal" title="获取所有方法"/>
+                                        <connections>
+                                            <action selector="getAllMethod:" destination="BYZ-38-t0r" eventType="touchUpInside" id="cqk-XB-S2W"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaC-6N-mDD">
+                                        <rect key="frame" x="20" y="180" width="108" height="30"/>
+                                        <state key="normal" title="添加一个新方法"/>
+                                        <connections>
+                                            <action selector="addNewMethod:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KSY-FI-PEC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cP2-vP-kbL">
+                                        <rect key="frame" x="12.5" y="210" width="123" height="30"/>
+                                        <state key="normal" title="交换两个方法功能"/>
+                                        <connections>
+                                            <action selector="exchangeMethod:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dVD-LG-HAP"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rq0-LA-d7Y">
+                                        <rect key="frame" x="28" y="240" width="92" height="30"/>
+                                        <state key="normal" title="查找一个方法"/>
+                                        <connections>
+                                            <action selector="getMethodWithName:" destination="BYZ-38-t0r" eventType="touchUpInside" id="np1-XE-VTz"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ymF-Yf-crh">
+                                <rect key="frame" x="87.5" y="60" width="200" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="CMj-Qv-ftk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bYP-Ra-M73">
+                                <rect key="frame" x="166" y="110" width="42" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ymF-Yf-crh" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="1GN-YE-0g7"/>
+                            <constraint firstItem="Ps3-JB-wgs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Diw-qm-FFY"/>
+                            <constraint firstItem="ymF-Yf-crh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="EMS-pw-YBG"/>
+                            <constraint firstItem="Ps3-JB-wgs" firstAttribute="top" secondItem="bYP-Ra-M73" secondAttribute="bottom" constant="30" id="KB5-aT-8I5"/>
+                            <constraint firstItem="bYP-Ra-M73" firstAttribute="top" secondItem="ymF-Yf-crh" secondAttribute="bottom" constant="20" id="RxN-Hq-cag"/>
+                            <constraint firstItem="bYP-Ra-M73" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="iAh-Kd-ehf"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="inputTF" destination="ymF-Yf-crh" id="H91-te-pUm"/>
+                        <outlet property="outputLabel" destination="bYP-Ra-M73" id="aHS-So-3q2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="127" y="268"/>
+        </scene>
+    </scenes>
+</document>
