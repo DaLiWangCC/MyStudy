@@ -77,6 +77,7 @@ def disassemble(fileName):
             else:
                 memoryValue = int(str(line), 2)
 
+            # list 按顺序存地址  dic 存地址加内容
             memList.append(str(address))
             memDic[str(address)] = memoryValue
             memStr = line.strip('\n') + '\t' + str(memoryValue)
@@ -161,69 +162,69 @@ def excuteInsSequential(address):
 
 # 执行具体的指令
 def excuteIns(address):
-    # for ins in insList:
-        ins = insSequenceDic[str(address)]
-        global cycle
-        ins.cycle = cycle
-        Output.slt.pasSim('--------------------\n')
-        Output.slt.pasSim(ins.printInstruction(0))
-        ins.currentPC = address
-        ins.nextPC = address + 4
 
-        if ins.opName == "NOP":
-            Operation.ex_NOP(ins,regList)
-        elif ins.opName == "ADD":
-            Operation.ex_ADD(ins,regList)
-        elif ins.opName == "SUB":
-            Operation.ex_SUB(ins, regList)
-        elif ins.opName == "MUL":
-            Operation.ex_MUL(ins, regList)
-        elif ins.opName == "AND":
-            Operation.ex_AND(ins, regList)
-        elif ins.opName == "OR":
-            Operation.ex_OR(ins, regList)
-        elif ins.opName == "XOR":
-            Operation.ex_XOR(ins, regList)
-        elif ins.opName == "NOR":
-            Operation.ex_NOR(ins, regList)
-        elif ins.opName == "SLT":
-            Operation.ex_SLT(ins, regList)
-        elif ins.opName == "ADDI":
-            Operation.ex_ADDI(ins, regList)
-        elif ins.opName == "ANDI":
-            Operation.ex_ANDI(ins, regList)
-        elif ins.opName == "ORI":
-            Operation.ex_ORI(ins, regList)
-        elif ins.opName == "XORI":
-            Operation.ex_XORI(ins, regList)
+    ins = insSequenceDic[str(address)]
+    global cycle
+    ins.cycle = cycle
+    Output.slt.pasSim('--------------------\n')
+    Output.slt.pasSim(ins.printInstruction(0))
+    ins.currentPC = address
+    ins.nextPC = address + 4
 
-        elif ins.opName == "J":
-            Operation.ex_J(ins, regList)
-        elif ins.opName == "JR":
-            Operation.ex_JR(ins, regList)
-        elif ins.opName == "BEQ":
-            Operation.ex_BEQ(ins, regList)
-        elif ins.opName == "BLTZ":
-            Operation.ex_BLTZ(ins, regList)
-        elif ins.opName == "BGTZ":
-            Operation.ex_BGTZ(ins, regList)
-        elif ins.opName == "BREAK":
-            Operation.ex_BREAK(ins, regList)
-        elif ins.opName == "SW":
-            Operation.ex_SW(ins, regList, memDic)
-        elif ins.opName == "LW":
-            Operation.ex_LW(ins, regList, memDic)
-        elif ins.opName == "SLL":
-            Operation.ex_SLL(ins, regList)
-        elif ins.opName == "SRL":
-            Operation.ex_SRL(ins, regList)
-        elif ins.opName == "SRA":
-            Operation.ex_SRA(ins, regList)
+    if ins.opName == "NOP":
+        Operation.ex_NOP(ins,regList)
+    elif ins.opName == "ADD":
+        Operation.ex_ADD(ins,regList)
+    elif ins.opName == "SUB":
+        Operation.ex_SUB(ins, regList)
+    elif ins.opName == "MUL":
+        Operation.ex_MUL(ins, regList)
+    elif ins.opName == "AND":
+        Operation.ex_AND(ins, regList)
+    elif ins.opName == "OR":
+        Operation.ex_OR(ins, regList)
+    elif ins.opName == "XOR":
+        Operation.ex_XOR(ins, regList)
+    elif ins.opName == "NOR":
+        Operation.ex_NOR(ins, regList)
+    elif ins.opName == "SLT":
+        Operation.ex_SLT(ins, regList)
+    elif ins.opName == "ADDI":
+        Operation.ex_ADDI(ins, regList)
+    elif ins.opName == "ANDI":
+        Operation.ex_ANDI(ins, regList)
+    elif ins.opName == "ORI":
+        Operation.ex_ORI(ins, regList)
+    elif ins.opName == "XORI":
+        Operation.ex_XORI(ins, regList)
 
-        # Output.slt.pas()('nextPC',ins.nextPC)
-        cycle += 1
-        printRegList(regList,memList)
-        return ins.nextPC
+    elif ins.opName == "J":
+        Operation.ex_J(ins, regList)
+    elif ins.opName == "JR":
+        Operation.ex_JR(ins, regList)
+    elif ins.opName == "BEQ":
+        Operation.ex_BEQ(ins, regList)
+    elif ins.opName == "BLTZ":
+        Operation.ex_BLTZ(ins, regList)
+    elif ins.opName == "BGTZ":
+        Operation.ex_BGTZ(ins, regList)
+    elif ins.opName == "BREAK":
+        Operation.ex_BREAK(ins, regList)
+    elif ins.opName == "SW":
+        Operation.ex_SW(ins, regList, memDic)
+    elif ins.opName == "LW":
+        Operation.ex_LW(ins, regList, memDic)
+    elif ins.opName == "SLL":
+        Operation.ex_SLL(ins, regList)
+    elif ins.opName == "SRL":
+        Operation.ex_SRL(ins, regList)
+    elif ins.opName == "SRA":
+        Operation.ex_SRA(ins, regList)
+
+    # Output.slt.pas()('nextPC',ins.nextPC)
+    cycle += 1
+    printRegList(regList,memList)
+    return ins.nextPC
 
 
 # 打印regList,memList

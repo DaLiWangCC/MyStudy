@@ -4,40 +4,28 @@ def ex_NOP(ins,regList):
     ins.nextPC += 4
 def ex_ADD(ins,regList):
     regList[int(ins.rd,2)] = regList[int(ins.rs,2)]+regList[int(ins.rt,2)]
-    # debug
 def ex_SUB(ins,regList):
     regList[int(ins.rd,2)] = regList[int(ins.rs,2)]-regList[int(ins.rt,2)]
-    # debug
 def ex_MUL(ins,regList):
     regList[int(ins.rd,2)] = regList[int(ins.rs,2)]*regList[int(ins.rt,2)]
-    # debug
 def ex_AND(ins,regList):
     regList[int(ins.rd,2)] = regList[int(ins.rs,2)] & regList[int(ins.rt,2)]
-    # debug
 def ex_OR(ins,regList):
     regList[int(ins.rd,2)] = regList[int(ins.rs,2)] | regList[int(ins.rt,2)]
-    # debug
 def ex_XOR(ins,regList):
     regList[int(ins.rd,2)] = regList[int(ins.rs,2)] ^ regList[int(ins.rt,2)]
-    # debug
 def ex_NOR(ins,regList):
     regList[int(ins.rd,2)] =  ~(regList[int(ins.rs,2)] | regList[int(ins.rt,2)])
-    # debug
 def ex_SLT(ins,regList):
     regList[int(ins.rd,2)] = iif(regList[int(ins.rs,2)] < regList[int(ins.rt,2)],1,0)
-    # debug
 def ex_ADDI(ins,regList):
     regList[int(ins.rt,2)] =  regList[int(ins.rs,2)] + int(ins.immediate,2)
-    # debug
 def ex_ANDI(ins,regList):
     regList[int(ins.rd,2)] =  regList[int(ins.rs,2)] & int(ins.immediate,2)
-    # debug
 def ex_ORI(ins,regList):
     regList[int(ins.rd,2)] =  regList[int(ins.rs,2)] | int(ins.immediate,2)
-    # debug
 def ex_XORI(ins,regList):
     regList[int(ins.rd,2)] =  regList[int(ins.rs,2)] ^ int(ins.immediate,2)
-    # debug
 
 # 部分需要左移两位+"00"
 def ex_J(ins,regList):
