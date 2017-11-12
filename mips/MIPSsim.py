@@ -52,6 +52,8 @@ ins2BinaryDic = {
 
 # 初始化指令list
 insSequenceDic = {}
+# 初始化反汇编内容
+insDisassemblyList = []
 # 初始化寄存器list
 regList = [0 for i in range(32)]
 # memList memDic
@@ -77,6 +79,8 @@ def disassemble(fileName):
 
             memList.append(str(address))
             memDic[str(address)] = memoryValue
+            memStr = line.strip('\n') + '\t' + str(memoryValue)
+            Output.slt.pasDis(memStr)
             line = f.readline()
             address += 4
             continue
@@ -145,6 +149,7 @@ def disassemble(fileName):
         ins.currentPC = address
         # 指令和指令地址存入字典
         insSequenceDic[str(address)] = ins
+        Output.slt.pasDis(ins.printInstruction(1))
         address += 4
 
         line = f.readline()
@@ -160,7 +165,8 @@ def excuteIns(address):
         ins = insSequenceDic[str(address)]
         global cycle
         ins.cycle = cycle
-        ins.printInstruction()
+        Output.slt.pasSim('--------------------\n')
+        Output.slt.pasSim(ins.printInstruction(0))
         ins.currentPC = address
         ins.nextPC = address + 4
 

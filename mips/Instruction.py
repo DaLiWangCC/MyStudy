@@ -1,6 +1,8 @@
 import MIPSsim
 import Output
 
+printDisOrSimtag = 0
+
 # 指令类
 class Instruction:
     # 操作名称
@@ -41,32 +43,32 @@ class Instruction:
     cycle = 0
     # 01指令字符串
     line = ''
-
-    # 打印本条指令 1:op rs rt rd   2:op rs rt imm   3:op index
-    def printInstruction(self):
-        Output.slt.pasSim('--------------------\n')
-        if self.printTag == "OpRsRtRd":
-            print_ins_OpRsRtRd(self)
-        elif self.printTag == "OpRsRtImm":
-            print_ins_OpRsRtImm(self)
-        elif self.printTag == "OpRsRtOffsetLS":
-            print_ins_OpRsRtOffsetLS(self)
-        elif self.printTag == "OpIndex":
-            print_ins_OpIndex(self)
-        elif self.printTag == "OpRsOffset":
-            print_ins_OpRsOffset(self)
-        elif self.printTag == "OpRsMem":
-            print_ins_OpRsMem(self)
-        elif self.printTag == "OpRs":
-            print_ins_OpRs(self)
-        elif self.printTag == "OpRdRtSa":
-            print_ins_OpRdRtSa(self)
-        elif self.printTag == "Op":
-            print_ins_Op(self)
-        Output.slt.pasDis('\n')
-
-    # 第二类
+    # index
     instr_index = ''
+    # 打印本条指令 1:op rs rt rd   2:op rs rt imm   3:op index
+    # tag = 0 打印反汇编  tag = 1 打印执行过程
+    def printInstruction(self,tag):
+        global printDisOrSimtag
+        printDisOrSimtag = tag
+        if self.printTag == "OpRsRtRd":
+            return print_ins_OpRsRtRd(self)
+        elif self.printTag == "OpRsRtImm":
+            return print_ins_OpRsRtImm(self)
+        elif self.printTag == "OpRsRtOffsetLS":
+            return print_ins_OpRsRtOffsetLS(self)
+        elif self.printTag == "OpIndex":
+            return print_ins_OpIndex(self)
+        elif self.printTag == "OpRsOffset":
+            return print_ins_OpRsOffset(self)
+        elif self.printTag == "OpRsMem":
+            return print_ins_OpRsMem(self)
+        elif self.printTag == "OpRs":
+            return print_ins_OpRs(self)
+        elif self.printTag == "OpRdRtSa":
+            return print_ins_OpRdRtSa(self)
+        elif self.printTag == "Op":
+            return print_ins_Op(self)
+        Output.slt.pasDis('\n')
 
 
 # 拼接寄存器名称
@@ -74,23 +76,29 @@ def appendRegName(regStr):
     return "R" + str(int(regStr, 2))
 def print_ins_Op(ins):
     insStr = str(ins.currentPC) + ' ' + ins.opName
-    Output.slt.pasSim('Cycle:' + str(ins.cycle) + ' ' + insStr)
-    Output.slt.pasDis(ins.line+'\t'+insStr)
+    if printDisOrSimtag:
+        return ins.line+'\t'+insStr
+    else:
+        return ('Cycle:' + str(ins.cycle) + ' ' + insStr)
 def print_ins_OpRs(ins):
     rs = appendRegName(ins.rs)
     rt = appendRegName(ins.rt)
     rd = appendRegName(ins.rd)
     insStr = str(ins.currentPC) + ' ' + ins.opName + " " + rs
-    Output.slt.pasSim('Cycle:' + str(ins.cycle) + ' ' + insStr)
-    Output.slt.pasDis(ins.line+'\t'+insStr)
+    if printDisOrSimtag:
+        return (ins.line+'\t'+insStr)
+    else:
+        return ('Cycle:' + str(ins.cycle) + ' ' + insStr)
 # 打印指令 op rs rt rd 类型
 def print_ins_OpRsRtRd(ins):
     rs = appendRegName(ins.rs)
     rt = appendRegName(ins.rt)
     rd = appendRegName(ins.rd)
     insStr = str(ins.currentPC) + ' ' + ins.opName+" "+rd+"," + rs + "," +rt
-    Output.slt.pasSim('Cycle:' + str(ins.cycle) + ' '+ insStr)
-    Output.slt.pasDis(ins.line+'\t'+insStr)
+    if printDisOrSimtag:
+        return (ins.line+'\t'+insStr)
+    else:
+        return ('Cycle:' + str(ins.cycle) + ' '+ insStr)
 
 # 打印指令 op rs rt immediate 类型
 def print_ins_OpRsRtImm(ins):
@@ -98,8 +106,10 @@ def print_ins_OpRsRtImm(ins):
     rt = appendRegName(ins.rt)
     immediate = "#"+str(int(ins.immediate, 2))
     insStr = str(ins.currentPC) + ' ' + ins.opName + " " + rt +"," + rs + "," +immediate
-    Output.slt.pasSim('Cycle:' + str(ins.cycle) + ' ' + insStr)
-    Output.slt.pasDis(ins.line+'\t'+insStr)
+    if printDisOrSimtag:
+        return (ins.line+'\t'+insStr)
+    else:
+        return ('Cycle:' + str(ins.cycle) + ' ' + insStr)
 
 # 打印指令 op rs rt immediate左移2位 类型
 def print_ins_OpRsRtOffsetLS(ins):
@@ -107,8 +117,10 @@ def print_ins_OpRsRtOffsetLS(ins):
     rt = appendRegName(ins.rt)
     offset = "#"+str(int(ins.offset+'00', 2))
     insStr = str(ins.currentPC) + ' ' + ins.opName + " " + rs +',' + rt + ',' +offset
-    Output.slt.pasSim('Cycle:' + str(ins.cycle) + ' ' +insStr)
-    Output.slt.pasDis(ins.line+'\t'+insStr)
+    if printDisOrSimtag:
+        return (ins.line+'\t'+insStr)
+    else:
+        return ('Cycle:' + str(ins.cycle) + ' ' +insStr)
 
 # 打印指令 op rs rt sa 类型
 def print_ins_OpRdRtSa(ins):
@@ -116,16 +128,20 @@ def print_ins_OpRdRtSa(ins):
     rt = appendRegName(ins.rt)
     sa = '#'+str(int(ins.sa,2))
     insStr = str(ins.currentPC) + ' ' + ins.opName + " " + rd +"," + rt + "," +sa
-    Output.slt.pasSim('Cycle:' + str(ins.cycle) + ' ' + insStr)
-    Output.slt.pasDis(ins.line+'\t'+insStr)
+    if printDisOrSimtag:
+        return (ins.line+'\t'+insStr)
+    else:
+        return ('Cycle:' + str(ins.cycle) + ' ' + insStr)
 
 # 打印指令 op rs  offset 类型
 def print_ins_OpRsOffset(ins):
     rs = appendRegName(ins.rs)
     offset = "#"+str(int(ins.offset+'00', 2))
     insStr = str(ins.currentPC) + ' ' + ins.opName+" "+rs+ "," +offset
-    Output.slt.pasSim('Cycle:' + str(ins.cycle) + ' ' + insStr)
-    Output.slt.pasDis(ins.line+'\t'+insStr)
+    if printDisOrSimtag:
+        return (ins.line+'\t'+insStr)
+    else:
+        return ('Cycle:' + str(ins.cycle) + ' ' + insStr)
 
 # 打印指令 op rs  offset(Rbase) 类型  rt ← memory[base+offset]
 def print_ins_OpRsMem(ins):
@@ -133,14 +149,18 @@ def print_ins_OpRsMem(ins):
     offset = str(int(ins.offset, 2))
     Rbase = '(R'+str(int(ins.base,2))+')'
     insStr = str(ins.currentPC) + ' ' + ins.opName+" "+rt+ "," +offset+Rbase
-    Output.slt.pasSim('Cycle:' + str(ins.cycle) + ' ' + insStr)
-    Output.slt.pasDis(ins.line+'\t'+insStr)
+    if printDisOrSimtag:
+        return (ins.line+'\t'+insStr)
+    else:
+        return ('Cycle:' + str(ins.cycle) + ' ' + insStr)
 
 # 打印指令 op index 类型
 def print_ins_OpIndex(ins):
     x = eval("0b" + ins.instr_index+'00')
     instr_index = "#"+str(x)
     insStr = str(ins.currentPC) + ' ' + ins.opName + " " + instr_index
-    Output.slt.pasSim('Cycle:' + str(ins.cycle) + ' ' + insStr)
-    Output.slt.pasDis(ins.line+'\t'+insStr)
+    if printDisOrSimtag:
+        return (ins.line+'\t'+insStr)
+    else:
+        return ('Cycle:' + str(ins.cycle) + ' ' + insStr)
 

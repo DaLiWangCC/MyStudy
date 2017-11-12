@@ -33,6 +33,7 @@ class Singleton(object):
         f = open(fileName,'w')
         for line in self.writeListDis:
             f.write(line)
+            f.write('\n')
 
 
 slt = Singleton()
