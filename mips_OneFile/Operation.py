@@ -15,24 +15,23 @@ def ex_OR(ins,regList):
 def ex_XOR(ins,regList):
     regList[int(ins.rd,2)] = regList[int(ins.rs,2)] ^ regList[int(ins.rt,2)]
 def ex_NOR(ins,regList):
-    regList[int(ins.rd,2)] = ~(regList[int(ins.rs,2)] | regList[int(ins.rt,2)])
+    regList[int(ins.rd,2)] =  ~(regList[int(ins.rs,2)] | regList[int(ins.rt,2)])
 def ex_SLT(ins,regList):
     regList[int(ins.rd,2)] = iif(regList[int(ins.rs,2)] < regList[int(ins.rt,2)],1,0)
 def ex_ADDI(ins,regList):
-    regList[int(ins.rt,2)] = regList[int(ins.rs,2)] + int(ins.immediate,2)
+    regList[int(ins.rt,2)] =  regList[int(ins.rs,2)] + int(ins.immediate,2)
 def ex_ANDI(ins,regList):
-    regList[int(ins.rd,2)] = regList[int(ins.rs,2)] & int(ins.immediate,2)
+    regList[int(ins.rd,2)] =  regList[int(ins.rs,2)] & int(ins.immediate,2)
 def ex_ORI(ins,regList):
-    regList[int(ins.rd,2)] = regList[int(ins.rs,2)] | int(ins.immediate,2)
+    regList[int(ins.rd,2)] =  regList[int(ins.rs,2)] | int(ins.immediate,2)
 def ex_XORI(ins,regList):
-    regList[int(ins.rd,2)] = regList[int(ins.rs,2)] ^ int(ins.immediate,2)
+    regList[int(ins.rd,2)] =  regList[int(ins.rs,2)] ^ int(ins.immediate,2)
 
 # 部分需要左移两位+"00"
 def ex_J(ins,regList):
     ins.nextPC = int(ins.immediate+"00",2)
 def ex_JR(ins,regList):
     ins.nextPC = int(ins.rs+"00",2)
-
 # 相等则+offset左移2位跳转
 def ex_BEQ(ins,regList):
     offset = iif(regList[int(ins.rs,2)] == regList[int(ins.rt,2)],int(ins.offset+"00",2),0)

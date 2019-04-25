@@ -50,13 +50,13 @@ ins2BinaryDic = {
     '111011': 'XORI',
 }
 
-# 初始化指令list
+# 初始化指令list  指令翻译成汇编后以  地址：指令的kv形式存入字典
 insSequenceDic = {}
 # 初始化反汇编内容
 insDisassemblyList = []
 # 初始化寄存器list
 regList = [0 for i in range(32)]
-# memList memDic
+# memList 内存地址的list   memDic 内存地址对应的值
 memList = []
 memDic = {}
 cycle = 1
@@ -163,6 +163,7 @@ def excuteInsSequential(address):
 # 执行具体的指令
 def excuteIns(address):
 
+    # insSequenceDic 是地址：指令 键值对
     ins = insSequenceDic[str(address)]
     global cycle
     ins.cycle = cycle
@@ -227,43 +228,30 @@ def excuteIns(address):
     return ins.nextPC
 
 
-# 打印regList,memList
+# 按照格式打印regList,memList
 def printRegList(regList,memList):
     Output.slt.pasSim('\n\nRegisters\n')
-    str1 = 'R00:'
-    for i in range(0,8):
-        str1 = str1 +'\t'+ str(regList[i])
-    str2 = 'R08:'
-    for i in range(8,16):
-        str2 = str2 + '\t' + str(regList[i])
-    str3 = 'R16:'
-    for i in range(16,24):
-        str3 = str3 + '\t' + str(regList[i])
-    str4 = 'R24:'
-    for i in range(24,32):
-        str4 = str4 + '\t' + str(regList[i])
+    for i in range(0, len(regList)//8):
+        num = i*8
+        regNumstr = str(num).zfill(2)
+        regNumstr = 'R' + regNumstr + ':'
+        numStr = ""
+        for j in range(0,8):
+            numStr = numStr + '\t' + str(regList[i*8+j])
+        regNumstr = regNumstr + numStr
+        Output.slt.pasSim(regNumstr + '\n')
 
-    Output.slt.pasSim(str1+'\n')
-    Output.slt.pasSim(str2+'\n')
-    Output.slt.pasSim(str3+'\n')
-    Output.slt.pasSim(str4+'\n')
-    Output.slt.pasSim('\n')
 
     Output.slt.pasSim('Data\n')
-    str1 = '340:'
-    for i in range(8):
-        str1 = str1 + '\t' + str(memDic[memList[i]])
+    for i in range(0, len(memList)//8):
+        strAdd = memList[i*8] + ':'
+        strValue = ""
+        for j in range(0,8):
+            strValue = strValue + '\t' + str(memDic[memList[i*8+j]])
+        finalStr = strAdd + strValue
+        Output.slt.pasSim(finalStr + '\n')
 
-    str2 = '372:'
-    for i in range(8):
-        str2 = str2 + '\t' + str(memDic[memList[i + 8]])
-    str3 = '404:'
-    for i in range(8):
-        str3 = str3 + '\t' + str(memDic[memList[i + 16]])
 
-    Output.slt.pasSim(str1+'\n')
-    Output.slt.pasSim(str2+'\n')
-    Output.slt.pasSim(str3+'\n')
 
 
 

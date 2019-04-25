@@ -2,10 +2,11 @@ import MIPSsim
 import Output
 
 # tag = 0 打印反汇编  tag = 1 打印执行过程
-printDisOrSimtag = 0
 
 # 指令类
 class Instruction:
+    printDisOrSimtag = 0
+
     def __init__(self):
 
         # 指令存放地址
